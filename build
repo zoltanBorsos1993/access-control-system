@@ -1,0 +1,27 @@
+#!/bin/bash
+
+environment=$1
+
+cmake_vars=""
+
+if [[ $environment == "rpi" ]]; then
+	echo "Building for 'rpi' environment..."
+	cmake_vars="${cmake_vars} -DCMAKE_TOOLCHAIN_FILE=/home/zoltanb/tools/toolchain-rpi.cmake"
+elif [[ $environment == "dev" ]]; then
+	echo "Building for 'dev' environment..."
+	echo "Getting toolchain information from system defaults..."
+else
+	echo "Building for 'dev' environment..."
+	echo "Getting toolchain information from system defaults..."
+fi
+
+mkdir -p .cmake-build.d \
+	&& rm -rf .cmake-build.d/* \
+	&& cd .cmake-build.d \
+	&& echo "Calling CMake..." \
+	&& cmake ../ ${cmake_vars} \
+	&& echo "Building app with Make..." \
+	&& make \
+	&& echo "Updating 'bin' dir..." \
+	&& rm -rf ../bin/* \
+	&& mv bin ../

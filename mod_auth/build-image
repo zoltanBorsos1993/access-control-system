@@ -1,0 +1,13 @@
+#!/bin/bash
+
+target_environment=$1
+
+if [[ $target_environment != "dev" && $target_environment != "rpi" ]]; then
+  echo "Invalid target environment: '${target_environment}'."
+  echo "Example: ./build-image dev"
+  echo "Example: ./build-image rpi"
+  exit 1
+fi
+
+echo "Building image 'monty/mod_auth'..."
+docker build --no-cache -t monty/mod_auth --build-arg TARGET_ENVIRONMENT=${target_environment} .

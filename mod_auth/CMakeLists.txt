@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 3.0)
 
 project (mod_auth)
 
-FILE(GLOB SRC_FILES src/*.cpp)
+FILE(GLOB_RECURSE SRC_FILES src/*.cpp)
 
 add_executable(mod_auth ${SRC_FILES})
 

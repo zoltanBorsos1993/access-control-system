@@ -1,6 +1,0 @@
-#!/bin/bash
-
-echo "Calling CMake..." \
-	&& cmake . \
-	&& echo "Building app with Make..." \
-	&& make
