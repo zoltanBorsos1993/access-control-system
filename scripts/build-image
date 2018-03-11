@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ $MODULE_NAME == "" ]]; then
+  echo "MODULE_NAME variable not set!"
+  exit 1
+fi
+
 if [[ $TARGET_ENVIRONMENT == "dev" ]]; then
    export TARGET_IMAGE="ubuntu:16.04"
 elif [[ $TARGET_ENVIRONMENT == "rpi" ]]; then
@@ -11,8 +16,8 @@ else
   exit 1
 fi
 
-echo "Building image 'monty-mod-auth-${TARGET_ENVIRONMENT}'..."
+echo "Building image 'monty-mod-${MODULE_NAME}-${TARGET_ENVIRONMENT}'..."
 docker build \
   --no-cache \
-  -t monty-mod-auth-${TARGET_ENVIRONMENT} \
+  -t monty-mod-${MODULE_NAME}-${TARGET_ENVIRONMENT} \
   --build-arg TARGET_ENVIRONMENT=${TARGET_ENVIRONMENT} --build-arg TARGET_IMAGE=${TARGET_IMAGE} .
