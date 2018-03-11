@@ -1,0 +1,29 @@
+#!/bin/bash
+
+if [[ $MODULE_NAME == "" ]]; then
+  echo "MODULE_NAME variable not set!"
+  exit 1
+fi
+
+image_name="monty-mod-${MODULE_NAME}-rpi"
+upload_url="http://resin.local:2375/images/load"
+
+temp_dir_path=$(mktemp -d)
+echo "Saving tar into ${temp_dir_path}"
+
+tar_image_path="${temp_dir_path}/${image_name}.tar"
+echo "Saving image as tar file into ${tar_image_path}"
+docker save -o ${tar_image_path} ${image_name}
+
+echo "tar size: $(du -h ${tar_image_path})"
+
+echo "Uploading '${image_name}.tar' via '${upload_url}'..."
+
+echo "Curl log:"
+curl -v \
+  --request POST \
+  -H "Content-type:application/octet-stream" \
+  --url ${upload_url} \
+  --data-binary "@${tar_image_path}"
+
+echo "Cleaning up..." && rm -rf ${temp_dir_path}

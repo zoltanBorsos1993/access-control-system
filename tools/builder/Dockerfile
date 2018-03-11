@@ -22,3 +22,9 @@ ADD https://github.com/raspberrypi/tools/archive/${RPI_TOOLS_COMMIT_SHA}.zip ${T
 RUN cd ${TOOLCHAINS_PATH} && unzip rpi-tools.zip && mv tools-${RPI_TOOLS_COMMIT_SHA} rpi-tools && rm rpi-tools.zip
 
 RUN mkdir ${HOME}/sources/
+
+ONBUILD COPY . sources/
+
+ONBUILD RUN cd $(mktemp -d) \
+          && cp -r ${HOME}/sources/* . \
+          && ${TOOLS_PATH}/build-app ${TARGET_ENVIRONMENT}

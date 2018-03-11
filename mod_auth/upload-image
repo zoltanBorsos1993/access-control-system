@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "Expecting 'monty-mod-auth-rpi' to be built and up to date!"
+
+MODULE_NAME="auth" ../scripts/upload-image

@@ -1,0 +1,10 @@
+.cmake-build.d/
+.externalToolBuilders/
+.settings/
+bin/
+CMakeFiles/
+.cproject
+.gitignore
+.project
+.resin-sync.yml
+build-image
