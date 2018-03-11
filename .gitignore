@@ -11,4 +11,3 @@ build/
 *.run
 .externalToolBuilders/
 .cmake-build.d
-.resin-sync.yml
