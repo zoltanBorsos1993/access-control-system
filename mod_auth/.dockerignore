@@ -6,5 +6,6 @@ CMakeFiles/
 .cproject
 .gitignore
 .project
-.resin-sync.yml
 build-image
+doc/
+upload-image
