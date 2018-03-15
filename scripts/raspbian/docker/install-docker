@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ "$EUID" -ne 0 ]; then
+  echo "Script must be run as root user. Exiting..."
+  exit 1
+fi
+
+echo "Installing Docker edge version as packages are currently not supported." \
+  && curl -fsSL get.docker.com -o /tmp/get-docker.sh \
+  && sh /tmp/get-docker.sh \
+  && echo "Success! Please add group 'docker' to users intented to use it without 'sudo'!"

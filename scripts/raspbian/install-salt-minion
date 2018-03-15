@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ "$EUID" -ne 0 ]; then
+  echo "Script must be run as root user. Exiting..."
+  exit 1
+fi
+
+echo 'deb http://archive.raspbian.org/raspbian/ stretch main' >> /etc/apt/sources.list \
+  && apt-get update \
+  && apt-get -y install python-zmq python-tornado/stretch salt-common/stretch salt-minion/stretch
