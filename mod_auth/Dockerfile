@@ -4,7 +4,6 @@ ARG TARGET_IMAGE
 # Builder
 FROM monty-builder
 
-
 # Application
 FROM ${TARGET_IMAGE}
 

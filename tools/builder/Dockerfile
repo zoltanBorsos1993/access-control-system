@@ -23,6 +23,8 @@ RUN cd ${TOOLCHAINS_PATH} && unzip rpi-tools.zip && mv tools-${RPI_TOOLS_COMMIT_
 
 RUN mkdir ${HOME}/sources/
 
+ONBUILD ARG TARGET_ENVIRONMENT
+
 ONBUILD COPY . sources/
 
 ONBUILD RUN cd $(mktemp -d) \

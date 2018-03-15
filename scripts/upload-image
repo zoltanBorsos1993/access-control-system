@@ -19,11 +19,6 @@ echo "tar size: $(du -h ${tar_image_path})"
 
 echo "Uploading '${image_name}.tar' via '${upload_url}'..."
 
-echo "Curl log:"
-curl -v \
-  --request POST \
-  -H "Content-type:application/octet-stream" \
-  --url ${upload_url} \
-  --data-binary "@${tar_image_path}"
+docker -H tcp://rpi.local:2375 load -i ${tar_image_path}
 
 echo "Cleaning up..." && rm -rf ${temp_dir_path}
