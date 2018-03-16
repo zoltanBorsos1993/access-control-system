@@ -18,6 +18,6 @@ fi
 
 echo "Building image 'monty-mod-${MODULE_NAME}-${TARGET_ENVIRONMENT}'..."
 docker build \
-  --no-cache \
+  # --no-cache \
   -t monty-mod-${MODULE_NAME}-${TARGET_ENVIRONMENT} \
   --build-arg TARGET_ENVIRONMENT=${TARGET_ENVIRONMENT} --build-arg TARGET_IMAGE=${TARGET_IMAGE} .

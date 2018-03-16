@@ -5,7 +5,7 @@ WORKDIR ${HOME}
 
 RUN apt-get update \
     && apt-get -y install \
-        unzip \
+        unzip curl \
         cmake=3.5.1-1ubuntu3 \
         gcc=4:5.3.1-1ubuntu1 g++=4:5.3.1-1ubuntu1 \
         git-all build-essential libtool \
@@ -19,16 +19,15 @@ ENV CMAKE_TOOLCHAINS_PATH="${TOOLCHAINS_PATH}/toolchains-cmake-files"
 COPY tools/ ${TOOLS_PATH}
 
 ENV RPI_TOOLS_COMMIT_SHA=5caa7046982f0539cf5380f94da04b31129ed521
-ADD https://github.com/raspberrypi/tools/archive/${RPI_TOOLS_COMMIT_SHA}.zip ${TOOLCHAINS_PATH}/rpi-tools.zip
-# COPY tools-${RPI_TOOLS_COMMIT_SHA}.zip ${TOOLCHAINS_PATH}/rpi-tools.zip
+RUN curl -L -o ${TOOLCHAINS_PATH}/rpi-tools.zip https://github.com/raspberrypi/tools/archive/${RPI_TOOLS_COMMIT_SHA}.zip
 RUN cd ${TOOLCHAINS_PATH} && unzip rpi-tools.zip && mv tools-${RPI_TOOLS_COMMIT_SHA} rpi-tools && rm rpi-tools.zip
 
-RUN mkdir ${HOME}/sources/
+RUN mkdir sources/ lib/ include/
 
 ONBUILD ARG TARGET_ENVIRONMENT
 
 ONBUILD COPY . sources/
 
-ONBUILD RUN cd $(mktemp -d) \
-          && cp -r ${HOME}/sources/* . \
-          && ${TOOLS_PATH}/build-app ${TARGET_ENVIRONMENT}
+# ONBUILD RUN cd $(mktemp -d) \
+#           && cp -r ${HOME}/sources/* . \
+#           && ${TOOLS_PATH}/build-app ${TARGET_ENVIRONMENT}
