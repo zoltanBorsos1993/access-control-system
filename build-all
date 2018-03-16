@@ -1,0 +1,14 @@
+#!/bin/bash
+
+target_environment=$1
+
+if [[ ${target_environment} == "" ]]; then
+  echo "No target target environment provided! Exiting..."
+  exit 1
+fi
+
+modules_list="auth comm database driver"
+
+for m in ${modules_list}; do
+  cd mod_${m}/ && ./build-image ${target_environment} && cd ../
+done

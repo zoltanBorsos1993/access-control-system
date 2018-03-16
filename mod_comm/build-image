@@ -1,0 +1,3 @@
+#!/bin/bash
+
+TARGET_ENVIRONMENT=$1 MODULE_NAME="comm" ../scripts/build-image 

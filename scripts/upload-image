@@ -6,7 +6,7 @@ if [[ $MODULE_NAME == "" ]]; then
 fi
 
 image_name="monty-mod-${MODULE_NAME}-rpi"
-upload_url="http://resin.local:2375/images/load"
+remote_host="tcp://rpi.local:2375"
 
 temp_dir_path=$(mktemp -d)
 echo "Saving tar into ${temp_dir_path}"
@@ -17,8 +17,8 @@ docker save -o ${tar_image_path} ${image_name}
 
 echo "tar size: $(du -h ${tar_image_path})"
 
-echo "Uploading '${image_name}.tar' via '${upload_url}'..."
+echo "Uploading '${image_name}.tar' via '${remote_host}'..."
 
-docker -H tcp://rpi.local:2375 load -i ${tar_image_path}
+docker -H ${remote_host} load -i ${tar_image_path}
 
 echo "Cleaning up..." && rm -rf ${temp_dir_path}

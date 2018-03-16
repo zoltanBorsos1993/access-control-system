@@ -1,0 +1,11 @@
+.cmake-build.d/
+.externalToolBuilders/
+.settings/
+bin/
+CMakeFiles/
+.cproject
+.gitignore
+.project
+build-image
+doc/
+upload-image

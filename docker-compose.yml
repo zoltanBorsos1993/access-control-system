@@ -1,0 +1,14 @@
+version: '3'
+services:
+  auth:
+    image: monty-mod-auth-rpi
+    container_name: mod_auth
+  comm:
+    image: monty-mod-comm-rpi
+    container_name: mod_comm
+  database:
+    image: monty-mod-database-rpi
+    container_name: mod_database
+  driver:
+    image: monty-mod-driver-rpi
+    container_name: mod_driver
