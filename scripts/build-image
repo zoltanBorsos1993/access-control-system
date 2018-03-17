@@ -5,19 +5,18 @@ if [[ $MODULE_NAME == "" ]]; then
   exit 1
 fi
 
-if [[ $TARGET_ENVIRONMENT == "dev" ]]; then
+if [[ $TARGET_ENVIRONMENT == "amd64" ]]; then
    export TARGET_IMAGE="ubuntu:16.04"
 elif [[ $TARGET_ENVIRONMENT == "rpi" ]]; then
   export TARGET_IMAGE="resin/raspberrypi3-debian"
 else
   echo "Invalid target environment: '${TARGET_ENVIRONMENT}'."
-  echo "Example: ./build-image dev"
+  echo "Example: ./build-image amd64"
   echo "Example: ./build-image rpi"
   exit 1
 fi
 
 echo "Building image 'monty-mod-${MODULE_NAME}-${TARGET_ENVIRONMENT}'..."
 docker build \
-  # --no-cache \
   -t monty-mod-${MODULE_NAME}-${TARGET_ENVIRONMENT} \
   --build-arg TARGET_ENVIRONMENT=${TARGET_ENVIRONMENT} --build-arg TARGET_IMAGE=${TARGET_IMAGE} .

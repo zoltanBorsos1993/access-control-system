@@ -1,26 +1,37 @@
-ARG TARGET_ENVIRONMENT
 ARG TARGET_IMAGE
 
 # Builder
 FROM monty-builder
 
+# Dependecies
+ENV ZMQ_VERSION="v4.2.3"
 RUN cd $(mktemp -d) \
-      && curl -L -o zmq.zip https://github.com/zeromq/libzmq/archive/v4.2.3.zip \
-      && unzip zmq.zip \
-      && cd libzmq-4.2.3 \
+      && git clone https://github.com/zeromq/libzmq.git \
+      && cd libzmq/ \
+      && git checkout ${ZMQ_VERSION} \
       && ./autogen.sh \
-      && ./configure \
+      && ./configure --host arm-linux-gnueabihf \
       && make install \
       && ldconfig
 
+ENV CZMQ_VERSION="v4.1.0"
 RUN cd $(mktemp -d) \
-      && curl -L -o czmq.zip https://github.com/zeromq/czmq/archive/v4.1.0.zip \
-      && unzip czmq.zip \
-      && cd czmq-4.1.0 \
+      && git clone https://github.com/zeromq/czmq.git \
+      && cd czmq/ \
+      && git checkout ${CZMQ_VERSION} \
       && ./autogen.sh \
-      && ./configure \
+      && ./configure --host arm-linux-gnueabihf \
       && make install \
       && ldconfig
+
+# Building app
+COPY . app/
+
+ARG TARGET_ENVIRONMENT
+
+RUN cd $(mktemp -d) \
+      && cp -r ${HOME}/app/* . \
+      && ${TOOLS_PATH}/build-app ${TARGET_ENVIRONMENT}
 
 # Application
 FROM ${TARGET_IMAGE}

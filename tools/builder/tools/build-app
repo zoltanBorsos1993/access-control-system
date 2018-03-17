@@ -6,11 +6,11 @@ cmake_vars=""
 
 if [[ $environment == "rpi" ]]; then
 	echo "Building for 'rpi' environment..."
-	cmake_vars="${cmake_vars} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAINS_PATH}/toolchain-rpi.cmake"
-elif [[ $environment == "dev" ]]; then
-	echo "Building for 'dev' environment..."
+	cmake_vars="${cmake_vars} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAINS_PATH}/toolchain-${TARGET_ENVIRONMENT}.cmake"
+elif [[ $environment == "amd64" ]]; then
+	echo "Building for 'amd64' environment..."
 	echo "Getting toolchain information from system defaults..."
-	cmake_vars="${cmake_vars} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAINS_PATH}/toolchain-amd64.cmake"
+	cmake_vars="${cmake_vars} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAINS_PATH}/toolchain-${TARGET_ENVIRONMENT}.cmake"
 else
 	echo "No environment specified! Exiting..."
 	exit 1

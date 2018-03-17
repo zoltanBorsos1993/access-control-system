@@ -22,12 +22,4 @@ ENV RPI_TOOLS_COMMIT_SHA=5caa7046982f0539cf5380f94da04b31129ed521
 RUN curl -L -o ${TOOLCHAINS_PATH}/rpi-tools.zip https://github.com/raspberrypi/tools/archive/${RPI_TOOLS_COMMIT_SHA}.zip
 RUN cd ${TOOLCHAINS_PATH} && unzip rpi-tools.zip && mv tools-${RPI_TOOLS_COMMIT_SHA} rpi-tools && rm rpi-tools.zip
 
-RUN mkdir sources/ lib/ include/
-
-ONBUILD ARG TARGET_ENVIRONMENT
-
-ONBUILD COPY . sources/
-
-# ONBUILD RUN cd $(mktemp -d) \
-#           && cp -r ${HOME}/sources/* . \
-#           && ${TOOLS_PATH}/build-app ${TARGET_ENVIRONMENT}
+RUN mkdir app/ lib/ include/
