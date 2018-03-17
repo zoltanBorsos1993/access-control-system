@@ -2,17 +2,28 @@ cmake_minimum_required (VERSION 3.0)
 
 PROJECT(mod_auth)
 
-# Includes and libs path
+# Includes
 SET(ZMQ_INCLUDE_PATH "/usr/local/include")
-SET(ZMQ_LIBRARY_PATH "/usr/local/lib")
 
-# Setting includes
 INCLUDE_DIRECTORIES(SYSTEM ${ZMQ_INCLUDE_PATH})
 
-# Finding application .cpp sources
+
+# Linking
+SET(LIBRARIES_LIST "zmq" "czmq")
+
+## ZMQ
+SET(ZMQ_LIBRARY_PATH "/usr/local/lib")
+ADD_LIBRARY(zmq STATIC IMPORTED GLOBAL)
+SET_TARGET_PROPERTIES(zmq PROPERTIES IMPORTED_LOCATION "${ZMQ_LIBRARY_PATH}/libzmq.a")
+
+ADD_LIBRARY(czmq STATIC IMPORTED GLOBAL)
+SET_TARGET_PROPERTIES(czmq PROPERTIES IMPORTED_LOCATION "${ZMQ_LIBRARY_PATH}/libczmq.a")
+
+
+# Create binary
+## Finding application .cpp sources
 FILE(GLOB_RECURSE SRC_FILES src/*.cpp)
 
-# Create target
 ADD_EXECUTABLE(mod_auth ${SRC_FILES})
 SET_TARGET_PROPERTIES(
 	mod_auth
@@ -21,8 +32,4 @@ SET_TARGET_PROPERTIES(
 	OUTPUT_NAME mod_auth.run
 	)
 
-TARGET_INCLUDE_DIRECTORIES(mod_auth INTERFACE ${ZMQ_INCLUDE_PATH})
-
-# Linking
-ADD_LIBRARY(zmq STATIC IMPORTED "${ZMQ_LIBRARY_PATH}/libzmq.a")
-ADD_LIBRARY(czmq STATIC IMPORTED "${ZMQ_LIBRARY_PATH}/libczmq.a")
+TARGET_LINK_LIBRARIES(mod_auth ${LIBRARIES_LIST})

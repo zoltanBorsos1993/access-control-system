@@ -10,7 +10,7 @@ RUN cd $(mktemp -d) \
       && cd libzmq/ \
       && git checkout ${ZMQ_VERSION} \
       && ./autogen.sh \
-      && ./configure --host arm-linux-gnueabihf \
+      && ./configure --host=arm-linux-gnueabihf --build=x86_64-linux-gnu \
       && make install \
       && ldconfig
 
@@ -20,7 +20,7 @@ RUN cd $(mktemp -d) \
       && cd czmq/ \
       && git checkout ${CZMQ_VERSION} \
       && ./autogen.sh \
-      && ./configure --host arm-linux-gnueabihf \
+      && ./configure --host=arm-linux-gnueabihf --build=x86_64-linux-gnu \
       && make install \
       && ldconfig
 
