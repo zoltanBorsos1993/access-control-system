@@ -5,7 +5,7 @@ if [[ $MODULE_NAME == "" ]]; then
   exit 1
 fi
 
-image_name="monty-mod-${MODULE_NAME}-rpi"
+image_name="monty-mod-${MODULE_NAME}-arm32v7"
 remote_host="tcp://rpi.local:2375"
 
 temp_dir_path=$(mktemp -d)

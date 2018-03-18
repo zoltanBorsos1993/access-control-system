@@ -4,8 +4,8 @@ environment=$1
 
 cmake_vars=""
 
-if [[ $environment == "rpi" ]]; then
-	echo "Building for 'rpi' environment..."
+if [[ $environment == "arm32v7" ]]; then
+	echo "Building for 'arm32v7' environment..."
 	cmake_vars="${cmake_vars} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAINS_PATH}/toolchain-${TARGET_ENVIRONMENT}.cmake"
 elif [[ $environment == "amd64" ]]; then
 	echo "Building for 'amd64' environment..."
@@ -22,6 +22,6 @@ mkdir -p .cmake-build.d \
 	&& echo "Calling CMake..." \
 	&& cmake ../ ${cmake_vars} \
 	&& echo "Building app with Make..." \
-	&& make \
+	&& make VERBOSE=1 \
 	&& echo "Updating 'bin' dir..." \
 	&& mv bin ${HOME}

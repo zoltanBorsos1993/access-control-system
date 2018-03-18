@@ -1,0 +1,14 @@
+#!/bin/bash
+
+lib_source_prefix="/deps"
+target_prefix="/usr"
+
+echo "Moving libs from ${lib_source_prefix} to ${target_prefix}"
+for d in ${lib_source_prefix}/* ; do
+  echo "Registering lib $(basename ${d})"
+  cp -r ${d}/* ${target_prefix}
+done
+
+
+echo "Cleaning up..."
+rm -rf ${lib_source_prefix}

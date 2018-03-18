@@ -1,14 +1,14 @@
 version: '3'
 services:
   auth:
-    image: monty-mod-auth-rpi
+    image: monty-mod-auth-arm32v7
     container_name: mod_auth
   comm:
-    image: monty-mod-comm-rpi
+    image: monty-mod-comm-arm32v7
     container_name: mod_comm
   database:
-    image: monty-mod-database-rpi
+    image: monty-mod-database-arm32v7
     container_name: mod_database
   driver:
-    image: monty-mod-driver-rpi
+    image: monty-mod-driver-arm32v7
     container_name: mod_driver

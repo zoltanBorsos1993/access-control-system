@@ -19,8 +19,4 @@ ENV CMAKE_TOOLCHAINS_PATH="${TOOLCHAINS_PATH}/toolchains-cmake-files"
 
 COPY tools/ ${TOOLS_PATH}
 
-ENV RPI_TOOLS_COMMIT_SHA=5caa7046982f0539cf5380f94da04b31129ed521
-RUN curl -L -o ${TOOLCHAINS_PATH}/rpi-tools.zip https://github.com/raspberrypi/tools/archive/${RPI_TOOLS_COMMIT_SHA}.zip
-RUN cd ${TOOLCHAINS_PATH} && unzip rpi-tools.zip && mv tools-${RPI_TOOLS_COMMIT_SHA} rpi-tools && rm rpi-tools.zip
-
-RUN mkdir app/ lib/ include/
+RUN mkdir src/ deps/

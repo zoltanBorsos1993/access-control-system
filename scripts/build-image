@@ -5,18 +5,22 @@ if [[ $MODULE_NAME == "" ]]; then
   exit 1
 fi
 
-if [[ $TARGET_ENVIRONMENT == "amd64" ]]; then
-   export TARGET_IMAGE="ubuntu:16.04"
-elif [[ $TARGET_ENVIRONMENT == "rpi" ]]; then
-  export TARGET_IMAGE="resin/raspberrypi3-debian"
+if [[ $TARGET_ENVIRONMENT == "x64" ]]; then
+   export TARGET_IMAGE="amd64/debian"
+   export TARGET_TRIPLET="x86_64-linux-gnu"
+elif [[ $TARGET_ENVIRONMENT == "arm32v7" ]]; then
+  export TARGET_IMAGE="monty-runner-arm32v7"
+  export TARGET_TRIPLET="arm-linux-gnueabihf"
 else
   echo "Invalid target environment: '${TARGET_ENVIRONMENT}'."
-  echo "Example: ./build-image amd64"
-  echo "Example: ./build-image rpi"
+  echo "Example: ./build-image x64"
+  echo "Example: ./build-image arm32v7"
   exit 1
 fi
 
 echo "Building image 'monty-mod-${MODULE_NAME}-${TARGET_ENVIRONMENT}'..."
 docker build \
   -t monty-mod-${MODULE_NAME}-${TARGET_ENVIRONMENT} \
-  --build-arg TARGET_ENVIRONMENT=${TARGET_ENVIRONMENT} --build-arg TARGET_IMAGE=${TARGET_IMAGE} .
+  --build-arg TARGET_ENVIRONMENT=${TARGET_ENVIRONMENT} \
+  --build-arg TARGET_IMAGE=${TARGET_IMAGE} \
+  --build-arg TARGET_TRIPLET=${TARGET_TRIPLET} .
