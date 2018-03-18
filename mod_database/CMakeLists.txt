@@ -1,14 +1,37 @@
 cmake_minimum_required (VERSION 3.0)
 
-project (mod_database)
+SET(MODULE_NAME "database")
 
+PROJECT(mod_${MODULE_NAME})
+
+# Linking
+SET(LIBRARIES_LIST
+		"zmq"
+		"czmq"
+	 )
+
+## ZMQ
+SET(ZMQ_PREFIX "/root/deps/zmq")
+INCLUDE_DIRECTORIES(SYSTEM ${ZMQ_PREFIX}/include)
+ADD_LIBRARY(zmq SHARED IMPORTED GLOBAL)
+SET_TARGET_PROPERTIES(zmq PROPERTIES IMPORTED_LOCATION "${ZMQ_PREFIX}/lib/libzmq.so")
+
+SET(CZMQ_PREFIX "/root/deps/czmq")
+INCLUDE_DIRECTORIES(SYSTEM ${CZMQ_PREFIX}/include)
+ADD_LIBRARY(czmq SHARED IMPORTED GLOBAL)
+SET_TARGET_PROPERTIES(czmq PROPERTIES IMPORTED_LOCATION "${CZMQ_PREFIX}/lib/libczmq.so")
+
+
+# Create binary
+## Finding application .cpp sources
 FILE(GLOB_RECURSE SRC_FILES src/*.cpp)
 
-add_executable(mod_database ${SRC_FILES})
-
-set_target_properties(
-	mod_database
+ADD_EXECUTABLE(mod_${MODULE_NAME} ${SRC_FILES})
+SET_TARGET_PROPERTIES(
+	mod_${MODULE_NAME}
 	PROPERTIES
 	RUNTIME_OUTPUT_DIRECTORY bin/
-	OUTPUT_NAME mod_database.run
+	OUTPUT_NAME mod_${MODULE_NAME}.run
 	)
+
+TARGET_LINK_LIBRARIES(mod_${MODULE_NAME} ${LIBRARIES_LIST})
