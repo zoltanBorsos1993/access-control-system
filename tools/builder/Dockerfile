@@ -5,7 +5,7 @@ WORKDIR ${HOME}
 
 RUN apt-get update \
     && apt-get -y install \
-        unzip curl \
+        unzip curl man \
         cmake=3.5.1-1ubuntu3 \
         gcc=4:5.3.1-1ubuntu1 g++=4:5.3.1-1ubuntu1 \
         git-all build-essential libtool \

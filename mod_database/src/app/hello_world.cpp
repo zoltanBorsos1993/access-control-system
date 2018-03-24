@@ -1,5 +1,6 @@
 #include <iostream>
 #include <czmq.h>
+#include <sqlite3.h>
 
 using namespace std;
 

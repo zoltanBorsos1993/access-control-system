@@ -3,6 +3,8 @@ ARG TARGET_IMAGE
 # Builder
 FROM monty-builder
 ARG TARGET_TRIPLET
+ARG C_COMPILER
+ARG CXX_COMPILER
 
 # Dependecies
 ENV ZMQ_VERSION="v4.2.3"
@@ -32,6 +34,16 @@ RUN cd $(mktemp -d) \
       && ldconfig
 ENV PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:${CZMQ_PREFIX}/lib/pkgconfig"
 
+ENV SQLITE_VERSION="3.22.0"
+ENV SQLITE_PREFIX="${HOME}/deps/sqlite3"
+RUN mkdir -p "${SQLITE_PREFIX}" "${SQLITE_PREFIX}/lib" "${SQLITE_PREFIX}/include"
+RUN cd $(mktemp -d) \
+    && curl -o sqlite.zip "https://www.sqlite.org/2018/sqlite-amalgamation-3220000.zip" \
+    && unzip sqlite \
+    && mv sqlite-amalgamation-3220000 sqlite \
+    && cd sqlite \
+    && ${C_COMPILER} -o "${SQLITE_PREFIX}/lib/libsqlite3.so" -fPIC -Wall -Wl,-soname,libsqlite3.so sqlite3.c -shared \
+    && cp sqlite3.h "${SQLITE_PREFIX}/include/"
 
 # Building app
 COPY . src/

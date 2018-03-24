@@ -8,9 +8,13 @@ fi
 if [[ $TARGET_ENVIRONMENT == "x64" ]]; then
    export TARGET_IMAGE="amd64/debian"
    export TARGET_TRIPLET="x86_64-linux-gnu"
+   export C_COMPILER="gcc"
+   export CXX_COMPILER="g++"
 elif [[ $TARGET_ENVIRONMENT == "arm32v7" ]]; then
   export TARGET_IMAGE="monty-runner-arm32v7"
   export TARGET_TRIPLET="arm-linux-gnueabihf"
+  export C_COMPILER="arm-linux-gnueabihf-gcc"
+  export CXX_COMPILER="arm-linux-gnueabihf-g++"
 else
   echo "Invalid target environment: '${TARGET_ENVIRONMENT}'."
   echo "Example: ./build-image x64"
@@ -23,4 +27,6 @@ docker build \
   -t monty-mod-${MODULE_NAME}-${TARGET_ENVIRONMENT} \
   --build-arg TARGET_ENVIRONMENT=${TARGET_ENVIRONMENT} \
   --build-arg TARGET_IMAGE=${TARGET_IMAGE} \
-  --build-arg TARGET_TRIPLET=${TARGET_TRIPLET} .
+  --build-arg TARGET_TRIPLET=${TARGET_TRIPLET} \
+  --build-arg C_COMPILER=${C_COMPILER} \
+  --build-arg CXX_COMPILER=${CXX_COMPILER} .
