@@ -8,7 +8,7 @@ ARG CXX_COMPILER
 
 # Dependecies
 ENV ZMQ_VERSION="v4.2.3"
-ENV ZMQ_PREFIX="${HOME}/deps/zmq"
+ENV ZMQ_PREFIX="${HOME}/deps/usr/local"
 RUN cd $(mktemp -d) \
       && git clone https://github.com/zeromq/libzmq.git \
       && cd libzmq/ \
@@ -20,7 +20,7 @@ RUN cd $(mktemp -d) \
 ENV PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:${ZMQ_PREFIX}/lib/pkgconfig"
 
 ENV CZMQ_VERSION="v4.1.0"
-ENV CZMQ_PREFIX="${HOME}/deps/czmq"
+ENV CZMQ_PREFIX="${HOME}/deps/usr/local"
 RUN cd $(mktemp -d) \
       && git clone https://github.com/zeromq/czmq.git \
       && cd czmq/ \
@@ -35,8 +35,7 @@ RUN cd $(mktemp -d) \
 ENV PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:${CZMQ_PREFIX}/lib/pkgconfig"
 
 ENV SQLITE_VERSION="3.22.0"
-ENV SQLITE_PREFIX="${HOME}/deps/sqlite3"
-RUN mkdir -p "${SQLITE_PREFIX}" "${SQLITE_PREFIX}/lib" "${SQLITE_PREFIX}/include"
+ENV SQLITE_PREFIX="${HOME}/deps/usr/local"
 RUN cd $(mktemp -d) \
     && curl -o sqlite.zip "https://www.sqlite.org/2018/sqlite-amalgamation-3220000.zip" \
     && unzip sqlite \

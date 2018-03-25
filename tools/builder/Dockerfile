@@ -5,7 +5,7 @@ WORKDIR ${HOME}
 
 RUN apt-get update \
     && apt-get -y install \
-        unzip curl man \
+        unzip curl man vim \
         cmake=3.5.1-1ubuntu3 \
         gcc=4:5.3.1-1ubuntu1 g++=4:5.3.1-1ubuntu1 \
         git-all build-essential libtool \
@@ -19,4 +19,4 @@ ENV CMAKE_TOOLCHAINS_PATH="${TOOLCHAINS_PATH}/toolchains-cmake-files"
 
 COPY tools/ ${TOOLS_PATH}
 
-RUN mkdir src/ deps/
+RUN mkdir src/ deps/ deps/usr deps/usr/include deps/usr/lib deps/usr/local deps/usr/local/include deps/usr/local/lib

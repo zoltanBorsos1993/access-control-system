@@ -6,7 +6,7 @@ ARG TARGET_TRIPLET
 
 # Dependecies
 ENV ZMQ_VERSION="v4.2.3"
-ENV ZMQ_PREFIX="${HOME}/deps/zmq"
+ENV ZMQ_PREFIX="${HOME}/deps/usr/local"
 RUN cd $(mktemp -d) \
       && git clone https://github.com/zeromq/libzmq.git \
       && cd libzmq/ \
@@ -18,7 +18,7 @@ RUN cd $(mktemp -d) \
 ENV PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:${ZMQ_PREFIX}/lib/pkgconfig"
 
 ENV CZMQ_VERSION="v4.1.0"
-ENV CZMQ_PREFIX="${HOME}/deps/czmq"
+ENV CZMQ_PREFIX="${HOME}/deps/usr/local"
 RUN cd $(mktemp -d) \
       && git clone https://github.com/zeromq/czmq.git \
       && cd czmq/ \
