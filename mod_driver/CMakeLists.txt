@@ -4,23 +4,15 @@ SET(MODULE_NAME "driver")
 
 PROJECT(mod_${MODULE_NAME})
 
+INCLUDE_DIRECTORIES("/root/deps/usr/include" "/root/deps/usr/local/include")
+LINK_DIRECTORIES("/root/deps/usr/lib" "/root/deps/usr/local/lib")
+
 # Linking
+## Expects libraries to be built according to the target architecture and are on the linking path.
 SET(LIBRARIES_LIST
 		"zmq"
 		"czmq"
 	 )
-
-## ZMQ
-SET(ZMQ_PREFIX "/root/deps/zmq")
-INCLUDE_DIRECTORIES(SYSTEM ${ZMQ_PREFIX}/include)
-ADD_LIBRARY(zmq SHARED IMPORTED GLOBAL)
-SET_TARGET_PROPERTIES(zmq PROPERTIES IMPORTED_LOCATION "${ZMQ_PREFIX}/lib/libzmq.so")
-
-SET(CZMQ_PREFIX "/root/deps/czmq")
-INCLUDE_DIRECTORIES(SYSTEM ${CZMQ_PREFIX}/include)
-ADD_LIBRARY(czmq SHARED IMPORTED GLOBAL)
-SET_TARGET_PROPERTIES(czmq PROPERTIES IMPORTED_LOCATION "${CZMQ_PREFIX}/lib/libczmq.so")
-
 
 # Create binary
 ## Finding application .cpp sources

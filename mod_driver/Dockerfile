@@ -35,14 +35,15 @@ RUN cd $(mktemp -d) \
 ENV PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:${CZMQ_PREFIX}/lib/pkgconfig"
 
 ENV WIRINGPI_VERSION="2.46"
-ENV WIRINGPI_COMMIT_SHA="8d188fa0e00bb8c6ff6eddd07bf92857e9bd533a"
 ENV WIRINGPI_DESTDIR="${HOME}/deps/usr"
 ENV WIRINGPI_PREFIX="/local"
+COPY deps/wiringPi /tmp/wiringPi
 RUN cd $(mktemp -d) \
-      && git clone git://git.drogon.net/wiringPi \
-      && cd wiringPi \
-      && git checkout ${WIRING_PI_COMMIT_SHA} \
-      && WIRINGPI_SUDO="" DESTDIR="${WIRINGPI_DESTDIR}" PREFIX="${WIRINGPI_PREFIX}" ./build
+      && mv /tmp/wiringPi . \
+      && cd wiringPi/wiringPi \
+      && export WIRINGPI_SUDO="" DESTDIR="${WIRINGPI_DESTDIR}" PREFIX="${WIRINGPI_PREFIX}" \
+      && make -j5 CC=${C_COMPILER} \
+      && make install CC=${C_COMPILER}
 
 
 # Building app

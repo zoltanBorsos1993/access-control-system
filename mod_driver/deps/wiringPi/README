@@ -1,0 +1,3 @@
+This is a fork/modification of the library wiringPi: http://wiringpi.com/.
+This project required the 'wiringPi' part of the whole wiringPi library for GPIO handling but the original version I didn't find "cross-compile-firendly" enough
+and I have committed minor changes considering the 'Makefile' to promote an easier building process.

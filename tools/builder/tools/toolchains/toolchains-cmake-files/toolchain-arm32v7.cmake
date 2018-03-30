@@ -11,4 +11,4 @@ SET(CMAKE_CXX_COMPILER arm-linux-gnueabihf-g++)
 SET(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 
 # Search for libraries and headers in the target directories only
-add_definitions(-Wall)
+ADD_DEFINITIONS(-Wall)

@@ -6,7 +6,7 @@ RemoteSystemsTempFiles
 CMakeCache.txt
 CMakeFiles/
 cmake_install.cmake
-Makefile
+# Makefile
 build/
 *.run
 .externalToolBuilders/
