@@ -16,7 +16,6 @@ TEST(Deserializer, FromStringToJson) {
 
   ASSERT_STREQ("zoltanb", j.at("username").get<std::string>().c_str());
   ASSERT_STREQ("secret", j.at("password").get<std::string>().c_str());
-
 }
 
 int main(int argc, char **argv) {

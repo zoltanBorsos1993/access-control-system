@@ -8,9 +8,12 @@ namespace auth {
 
 class AuthenticationApi {
  public:
-  AuthenticationResponse& authenticate(AuthenticationRequest& request);
+  static AuthenticationApi* GetInstance();
+  AuthenticationResponse& Authenticate(AuthenticationRequest& request);
+  const std::string Info();
 
  private:
+  static AuthenticationApi* instance_;
   AuthenticationResponse& GenerateSuccessfullResult(AuthenticationRequest&);
   AuthenticationResponse& GenerateFailureResult(AuthenticationRequest&);
 };
