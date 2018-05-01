@@ -4,19 +4,21 @@ SET(MODULE_NAME "auth")
 
 PROJECT(mod_${MODULE_NAME})
 
+# Linking
+## Expects libraries to be built according to the target architecture and are on the linking path.
+
 INCLUDE_DIRECTORIES("/root/deps/usr/include" "/root/deps/usr/local/include")
 LINK_DIRECTORIES("/root/deps/usr/lib" "/root/deps/usr/local/lib")
 
-# Linking
-## Expects libraries to be built according to the target architecture and are on the linking path.
 SET(LIBRARIES_LIST
 			"zmq"
 			"czmq"
 	 )
 
 # Create binary
-## Finding application .cpp sources
-FILE(GLOB_RECURSE SRC_FILES src/*.cpp)
+## Finding application .cc sources
+FILE(GLOB_RECURSE SRC_FILES src/*.cc)
+INCLUDE_DIRECTORIES("src")
 
 ADD_EXECUTABLE(mod_${MODULE_NAME} ${SRC_FILES})
 SET_TARGET_PROPERTIES(

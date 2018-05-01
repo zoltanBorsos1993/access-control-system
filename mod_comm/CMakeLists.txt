@@ -15,8 +15,8 @@ SET(LIBRARIES_LIST
 	 )
 
 # Create binary
-## Finding application .cpp sources
-FILE(GLOB_RECURSE SRC_FILES src/*.cpp)
+## Finding application .cc sources
+FILE(GLOB_RECURSE SRC_FILES src/*.cc)
 
 ADD_EXECUTABLE(mod_${MODULE_NAME} ${SRC_FILES})
 SET_TARGET_PROPERTIES(
