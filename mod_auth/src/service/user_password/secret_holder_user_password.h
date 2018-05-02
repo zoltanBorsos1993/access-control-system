@@ -8,8 +8,10 @@
 namespace auth {
 class SecretHolderUserPassword : public SecretHolder {
  public:
+  SecretHolderUserPassword();
   SecretHolderUserPassword(UserPassword*);
   const std::string* GetSecret();
+  void SetSecret(std::string*);
 
  private:
   const std::string* secret_;

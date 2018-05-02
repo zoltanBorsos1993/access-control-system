@@ -1,7 +1,6 @@
 #include <service/user_password/credential_validator_user_password.h>
 #include <cstdlib>
 #include <ctime>
-#include <iostream>
 
 namespace auth {
 

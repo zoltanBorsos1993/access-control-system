@@ -9,14 +9,22 @@
 
 namespace auth {
 
+enum class RequestMethod {
+  AUTHENTICATE,
+  INFO
+};
+
 class AuthenticationRequest {
 
  public:
   void SetSecretHolder(SecretHolder*);
   SecretHolder* GetSecretHolder();
+  RequestMethod GetRequestMethod();
+  void SetRequestMethod(std::string);
 
  private:
   SecretHolder* secret_holder_;
+  RequestMethod request_method_;
 };
 }
 

@@ -5,7 +5,7 @@
 
 namespace auth {
 
-enum MessageStatus {
+enum class MessageStatus {
   SUCCESS,
   INFO,
   WARNING,

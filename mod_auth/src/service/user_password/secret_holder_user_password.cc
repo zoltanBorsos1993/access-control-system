@@ -2,6 +2,9 @@
 
 namespace auth {
 
+SecretHolderUserPassword::SecretHolderUserPassword() {
+}
+
 SecretHolderUserPassword::SecretHolderUserPassword(UserPassword* secret_wrapper) {
   const std::string mangled = secret_wrapper->GetUserName() + ":" + secret_wrapper->GetPassword();
   this->secret_ = &mangled;
@@ -9,6 +12,10 @@ SecretHolderUserPassword::SecretHolderUserPassword(UserPassword* secret_wrapper)
 
 const std::string* SecretHolderUserPassword::GetSecret() {
   return this->secret_;
+}
+
+void SecretHolderUserPassword::SetSecret(std::string* secret) {
+  secret_ = secret;
 }
 
 }

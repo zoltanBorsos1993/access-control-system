@@ -6,10 +6,10 @@
 
 namespace auth {
 
-class NotImplementedException : public std::runtime_error {
- public:
-  NotImplementedException(const std::string& message) : std::logic_error(message) {};
-};
+//class NotImplementedException : public std::runtime_error {
+// public:
+//  NotImplementedException(const std::string& message) : std::logic_error(message) {};
+//};
 
 }
 

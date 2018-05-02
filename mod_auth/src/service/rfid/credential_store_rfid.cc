@@ -3,14 +3,12 @@
 #include <service/rfid/credential_store_rfid.h>
 #include <cstdlib>
 #include <ctime>
-#include <iostream>
 
 namespace auth {
 
 CredentialStore* CredentialStoreRfid::instance_;
 
 CredentialStoreRfid::CredentialStoreRfid() {
-
 }
 
 CredentialStore* CredentialStoreRfid::GetInstance() {
