@@ -16,15 +16,19 @@ void to_json(nlohmann::json& json, const AuthenticationRequest& request) {
 }
 
 void from_json(const nlohmann::json& json, SecretHolder& secret_holder) {
- secret_holder = json.get<SecretHolderUserPassword>();
+//  SecretHolderUserPassword& secret_holder_sub = (SecretHolderUserPassword&)secret_holder;
+//  std::string* secret = new std::string(json.at("username").get<std::string>() + ":" + json.at("password").get<std::string>());
+//  secret_holder_sub.SetSecret(secret);
+
+//  secret_holder = json.get<SecretHolderUserPassword>();
 }
 
 void to_json(const nlohmann::json& json, SecretHolder& secret_holder) {
 }
 
 void from_json(const nlohmann::json& json, SecretHolderUserPassword& user_password_secret_holder) {
-  std::string* secret = new std::string(json.at("username").get<std::string>() + ":" + json.at("password").get<std::string>());
-  user_password_secret_holder.SetSecret(secret);
+//  std::string* secret = new std::string(json.at("username").get<std::string>() + ":" + json.at("password").get<std::string>());
+//  user_password_secret_holder.SetSecret(secret);
 }
 
 void to_json(const nlohmann::json& j, SecretHolderUserPassword& user_password_secret_holder) {
