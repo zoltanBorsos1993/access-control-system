@@ -2,6 +2,7 @@
 #define COMM_SER_DES_SER_DES_H_
 
 #include "api/authentication_request.h"
+#include "api/authentication_response.h"
 
 #include <string>
 
@@ -11,8 +12,8 @@ class SerDes {
  public:
   SerDes();
   virtual ~SerDes();
-  virtual AuthenticationRequest Deserialize(std::string) = 0;
-  virtual std::string Serialize(AuthenticationRequest) = 0;
+  virtual AuthenticationRequest Deserialize(void*) = 0;
+  virtual void* Serialize(AuthenticationResponse*) = 0;
 };
 
 }

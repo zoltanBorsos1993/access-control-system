@@ -13,13 +13,13 @@ JsonSerDes::JsonSerDes() {
 JsonSerDes::~JsonSerDes() {
 }
 
-AuthenticationRequest JsonSerDes::Deserialize(std::string deserializable) {
-  nlohmann::json json = nlohmann::json::parse(deserializable);
-  AuthenticationRequest request = json.get<AuthenticationRequest>();
-  return request;
+AuthenticationRequest JsonSerDes::Deserialize(void* deserializable) {
+//  nlohmann::json json = nlohmann::json::parse(deserializable);
+//  AuthenticationRequest request = json.get<AuthenticationRequest>();
+//  return request;
 }
 
-std::string JsonSerDes::Serialize(AuthenticationRequest serializable) {
+void* JsonSerDes::Serialize(AuthenticationResponse* serializable) {
   throw "Dunno how to throw correct exception.";
 }
 

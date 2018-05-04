@@ -2,7 +2,7 @@
 #include "app/modules.h"
 
 #include <zmq.hpp>
-
+#include "comm/ser_des/json/json_ser_des.h"
 #include <cstdio>
 
 namespace auth {
@@ -11,6 +11,7 @@ NetworkHandler* NetworkHandler::instance_ = nullptr;
 ZmqHandler* ZmqHandler::impl_instance = nullptr;
 
 ZmqHandler::ZmqHandler() {
+  dispatcher_ = nullptr;
 }
 
 ZmqHandler::~ZmqHandler() {
@@ -50,13 +51,9 @@ void ZmqHandler::StartZmqServer() {
 
     socket.recv(&request);
 
-    printf("Received something...\n");
+    printf("Received data's via ZMQ...\n");
 
-    printf("Received data's size: %i\n", request.size());
-    printf("Received content: %s\n", request.data());
-
-    // Deserialize...
-    // Dispatch...
+    dispatcher_->Dispatch(request.data());
 
     zmq::message_t reply(3);
     memcpy(reply.data(), "OK!", 3);

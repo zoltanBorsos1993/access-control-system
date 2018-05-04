@@ -2,6 +2,8 @@
 #define COMM_NETWORK_NETWORK_HANDLER_H_
 
 #include "app/modules.h"
+#include "comm/ser_des/ser_des.h"
+#include "comm/dispatcher/dispatcher.h"
 
 #include <string>
 
@@ -15,6 +17,7 @@ class NetworkHandler {
  protected:
   NetworkHandler();
   virtual ~NetworkHandler();
+  Dispatcher* dispatcher_;
   static NetworkHandler* instance_;
 };
 

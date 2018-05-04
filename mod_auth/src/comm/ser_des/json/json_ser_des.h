@@ -9,8 +9,8 @@ class JsonSerDes : public SerDes {
  public:
   JsonSerDes();
   virtual ~JsonSerDes();
-  AuthenticationRequest Deserialize(std::string) override;
-  std::string Serialize(AuthenticationRequest) override;
+  AuthenticationRequest Deserialize(void*) override;
+  void* Serialize(AuthenticationResponse*) override;
 };
 
 }

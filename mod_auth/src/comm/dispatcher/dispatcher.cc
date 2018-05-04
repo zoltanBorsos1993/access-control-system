@@ -1,21 +1,30 @@
+#include "comm/dispatcher/dispatcher.h"
 #include "comm/ser_des/ser_des_factory.h"
 #include "api/authentication_api.h"
 
-#include <stdexcept>
-#include <cstdio>
-#include <string>
-
 namespace auth {
 
-void Dispatch(std::string message) {
-  SerDes* ser_des = SerDesFactory::GetJsonSerDes();
+Dispatcher::Dispatcher() {
+  ser_des_ = SerDesFactory::GetJsonSerDes();
+}
 
-  AuthenticationRequest request = ser_des->Deserialize(message);
+Dispatcher *Dispatcher::instance_;
+
+Dispatcher* Dispatcher::GetInstance() {
+  if (instance_ == nullptr) {
+    instance_ = new Dispatcher();
+  }
+  return instance_;
+}
+
+void* Dispatcher::Dispatch(void* raw) {
+  AuthenticationRequest request = ser_des_->Deserialize(raw);
   RequestMethod method = request.GetRequestMethod();
 
+  AuthenticationResponse response;
   if (method == RequestMethod::AUTHENTICATE) {
     printf("'authentication' dispatched!");
-    AuthenticationApi::GetInstance()->Authenticate(request);
+    response = AuthenticationApi::GetInstance()->Authenticate(request);
 
   } else if (method == RequestMethod::INFO) {
     printf("'info' dispatched!");
@@ -27,5 +36,7 @@ void Dispatch(std::string message) {
 
     throw std::invalid_argument(error_message);
   }
+
+  return ser_des_->Serialize(&response);
 }
 }
