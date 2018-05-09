@@ -9,7 +9,6 @@
 #include <iostream>
 #include <csignal>
 
-
 void int_handler(int x) {
   std::cout << std::endl;
   printf("SIGINT received! Stopping AUTH module...\n");
@@ -17,20 +16,22 @@ void int_handler(int x) {
 }
 
 void StartNetworking() {
-  auth::NetworkHandler* network_handler = auth::ZmqHandler::GetInstance();
+  auth::NetworkHandler *network_handler = auth::ZmqHandler::GetInstance();
   network_handler->Start();
 }
 
 int main() {
- std::signal(SIGINT, int_handler);
+  std::signal(SIGINT, int_handler);
 
- printf("AUTH module starting...\n");
+  printf("AUTH module starting...\n");
 
- printf("Start networking...\n");
- std::thread networking(StartNetworking);
+  printf("Start networking...\n");
+  std::thread networking(StartNetworking);
 
- usleep(3E6);
- printf("AUTH module started!\n");
- // while (Not every component/thread started == true) {}
- std::cin.get();
+  usleep(3E6);
+  // while (Not every component/thread started == true) {}
+
+  printf("AUTH module started!\n");
+
+  std::cin.get();
 }

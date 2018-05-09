@@ -1,5 +1,8 @@
 #include "api/authentication_request.h"
 
+#include <locale>
+#include <stdexcept>
+
 namespace auth {
 
 void AuthenticationRequest::SetSecretHolder(SecretHolder* secret_holder) {
@@ -21,7 +24,7 @@ void AuthenticationRequest::SetRequestMethod(std::string request_method) {
   } else if (request_method == "INFO") {
     request_method_ = RequestMethod::INFO;
   } else {
-    throw "Invalid authentication request method!";
+    throw std::runtime_error("Invalid method requested from AUTH: '" + request_method + "'.\n");
   }
 }
 }

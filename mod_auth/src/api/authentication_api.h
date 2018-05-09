@@ -9,10 +9,12 @@ namespace auth {
 class AuthenticationApi {
  public:
   static AuthenticationApi* GetInstance();
-  AuthenticationResponse& Authenticate(AuthenticationRequest& request);
+  AuthenticationResponse& Authenticate(AuthenticationRequest&);
   const std::string Info();
 
  private:
+  AuthenticationApi();
+  virtual ~AuthenticationApi();
   static AuthenticationApi* instance_;
   AuthenticationResponse& GenerateSuccessfullResult(AuthenticationRequest&);
   AuthenticationResponse& GenerateFailureResult(AuthenticationRequest&);

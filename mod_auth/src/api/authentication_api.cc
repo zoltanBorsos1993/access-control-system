@@ -8,6 +8,9 @@ namespace auth {
 
 AuthenticationApi* AuthenticationApi::instance_ = new AuthenticationApi();
 
+AuthenticationApi::AuthenticationApi() {}
+AuthenticationApi::~AuthenticationApi() {}
+
 AuthenticationApi* AuthenticationApi::GetInstance() {
   return instance_;
 }

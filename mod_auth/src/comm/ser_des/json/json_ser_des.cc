@@ -14,13 +14,15 @@ JsonSerDes::~JsonSerDes() {
 }
 
 AuthenticationRequest JsonSerDes::Deserialize(void* deserializable) {
-//  nlohmann::json json = nlohmann::json::parse(deserializable);
-//  AuthenticationRequest request = json.get<AuthenticationRequest>();
-//  return request;
+  auto data_p = (char*)deserializable;
+  nlohmann::json json = nlohmann::json::parse(data_p);
+
+  AuthenticationRequest request = json.get<AuthenticationRequest>();
+  return request;
 }
 
 void* JsonSerDes::Serialize(AuthenticationResponse* serializable) {
-  throw "Dunno how to throw correct exception.";
+  throw std::runtime_error("JSON 'Serialize' not yet implemented.");
 }
 
 }

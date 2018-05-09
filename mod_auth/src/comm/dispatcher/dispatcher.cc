@@ -23,11 +23,11 @@ void* Dispatcher::Dispatch(void* raw) {
 
   AuthenticationResponse response;
   if (method == RequestMethod::AUTHENTICATE) {
-    printf("'authentication' dispatched!");
+    printf("'authentication' dispatched!\n");
     response = AuthenticationApi::GetInstance()->Authenticate(request);
 
   } else if (method == RequestMethod::INFO) {
-    printf("'info' dispatched!");
+    printf("'info' dispatched!\n");
     printf(AuthenticationApi::GetInstance()->Info().c_str());
 
   } else {

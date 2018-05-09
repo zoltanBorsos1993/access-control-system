@@ -1,17 +1,17 @@
-#include <comm/network/zmq_handler.h>
+#include "comm/network/zmq_handler.h"
+#include "comm/ser_des/json/json_ser_des.h"
+#include "comm/dispatcher/dispatcher.h"
 #include "app/modules.h"
 
 #include <zmq.hpp>
-#include "comm/ser_des/json/json_ser_des.h"
 #include <cstdio>
 
 namespace auth {
 
 NetworkHandler* NetworkHandler::instance_ = nullptr;
-ZmqHandler* ZmqHandler::impl_instance = nullptr;
 
 ZmqHandler::ZmqHandler() {
-  dispatcher_ = nullptr;
+  dispatcher_ = Dispatcher::GetInstance();
 }
 
 ZmqHandler::~ZmqHandler() {
@@ -19,10 +19,8 @@ ZmqHandler::~ZmqHandler() {
 
 NetworkHandler* ZmqHandler::GetInstance() {
   if (instance_ == nullptr) {
-    impl_instance = new ZmqHandler();
-    instance_ = impl_instance;
+    instance_ = new ZmqHandler();
   }
-
   return instance_;
 }
 
@@ -51,7 +49,7 @@ void ZmqHandler::StartZmqServer() {
 
     socket.recv(&request);
 
-    printf("Received data's via ZMQ...\n");
+    printf("Received data via ZMQ...\n");
 
     dispatcher_->Dispatch(request.data());
 
