@@ -8,7 +8,7 @@
 
 namespace auth {
 
-NetworkHandler* NetworkHandler::instance_ = nullptr;
+NetworkHandler* NetworkHandler::instance_ = NULL;
 
 ZmqHandler::ZmqHandler() {
   dispatcher_ = Dispatcher::GetInstance();
@@ -18,7 +18,7 @@ ZmqHandler::~ZmqHandler() {
 }
 
 NetworkHandler* ZmqHandler::GetInstance() {
-  if (instance_ == nullptr) {
+  if (instance_ == NULL) {
     instance_ = new ZmqHandler();
   }
   return instance_;

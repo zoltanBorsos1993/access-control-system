@@ -13,6 +13,7 @@ LINK_DIRECTORIES("/root/deps/usr/lib" "/root/deps/usr/local/lib")
 SET(LIBRARIES_LIST
 			"zmq"
 			"czmq"
+			"pthread"
 	 )
 
 # Create binary

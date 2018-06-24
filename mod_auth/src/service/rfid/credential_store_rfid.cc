@@ -12,7 +12,7 @@ CredentialStoreRfid::CredentialStoreRfid() {
 }
 
 CredentialStore* CredentialStoreRfid::GetInstance() {
-  if (instance_ == nullptr) {
+  if (instance_ == NULL) {
     instance_ = new CredentialStoreRfid;
   }
   return instance_;

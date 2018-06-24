@@ -10,5 +10,5 @@ SET(CMAKE_CXX_COMPILER arm-linux-gnueabihf-g++)
 # Use our definitions for compiler tools
 SET(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 
-ADD_DEFINITIONS("-Wall")
-ADD_COMPILE_OPTIONS("-std=c++11")
+# ADD_DEFINITIONS("-Wall" "-O0")
+ADD_COMPILE_OPTIONS("-std=c++11" "-Wall" "-O0")

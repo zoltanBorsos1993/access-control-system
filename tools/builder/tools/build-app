@@ -7,8 +7,8 @@ cmake_vars=""
 if [[ $environment == "arm32v7" ]]; then
 	echo "Building for 'arm32v7' environment..."
 	cmake_vars="${cmake_vars} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAINS_PATH}/toolchain-${TARGET_ENVIRONMENT}.cmake"
-elif [[ $environment == "amd64" ]]; then
-	echo "Building for 'amd64' environment..."
+elif [[ $environment == "x64" ]]; then
+	echo "Building for 'x64' environment..."
 	echo "Getting toolchain information from system defaults..."
 	cmake_vars="${cmake_vars} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAINS_PATH}/toolchain-${TARGET_ENVIRONMENT}.cmake"
 else

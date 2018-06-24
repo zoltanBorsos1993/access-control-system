@@ -22,3 +22,5 @@ echo "Uploading '${image_name}.tar' via '${remote_host}'..."
 docker -H ${remote_host} load -i ${tar_image_path}
 
 echo "Cleaning up..." && rm -rf ${temp_dir_path}
+
+echo -e "\e[32mUpload successful!\e[0m"

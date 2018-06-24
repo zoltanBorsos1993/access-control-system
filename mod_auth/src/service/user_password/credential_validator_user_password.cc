@@ -11,7 +11,7 @@ CredentialValidatorUserPassword::CredentialValidatorUserPassword() {
 }
 
 CredentialStore* CredentialValidatorUserPassword::GetInstance() {
-  if (instance_ == nullptr) {
+  if (instance_ == NULL) {
     instance_ = new CredentialValidatorUserPassword;
   }
   return instance_;

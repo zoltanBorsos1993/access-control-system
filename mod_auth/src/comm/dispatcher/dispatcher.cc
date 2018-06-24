@@ -11,7 +11,7 @@ Dispatcher::Dispatcher() {
 Dispatcher *Dispatcher::instance_;
 
 Dispatcher* Dispatcher::GetInstance() {
-  if (instance_ == nullptr) {
+  if (instance_ == NULL) {
     instance_ = new Dispatcher();
   }
   return instance_;
