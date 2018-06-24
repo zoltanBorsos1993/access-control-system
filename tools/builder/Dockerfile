@@ -19,4 +19,6 @@ ENV CMAKE_TOOLCHAINS_PATH="${TOOLCHAINS_PATH}/toolchains-cmake-files"
 
 COPY tools/ ${TOOLS_PATH}
 
-RUN mkdir src/ deps/ deps/usr deps/usr/include deps/usr/lib deps/usr/local deps/usr/local/include deps/usr/local/lib
+RUN mkdir \
+  src/ \
+  deps/ deps/usr deps/usr/include deps/usr/lib deps/usr/local deps/usr/local/include deps/usr/local/lib
